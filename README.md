@@ -1,3 +1,5 @@
+How to run the app?
+
 cd backend 
 npm i
 npm run server.js
