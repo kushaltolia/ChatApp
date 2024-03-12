@@ -8,4 +8,4 @@ npm run server.js\
 
 cd frontend\
 npm i\
-npm run dev\
+npm run dev
