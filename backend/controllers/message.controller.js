@@ -24,10 +24,7 @@ export async function sendMessage(req, res) {
         }
         await newMessage.save();
         await conversation.save();
-        res.status(201).json({
-            message : "Message sent successfully",
-            Content : newMessage
-        })
+        res.status(201).json(newMessage)
     } catch(error) {
         console.log("error in sending the message");
         res.status(500).json({
@@ -44,9 +41,9 @@ export async function getMessages(req, res) {
             participants : {$all : [senderId, userToChatId]}
         }).populate("messages");
 
-        res.status(201).json({
-            messages : conversation.messages
-        })
+        if (!conversation) return res.status(200).json([]);
+        const messages = conversation.messages;
+        res.status(201).json(messages)
     } catch(error) {
         console.log("Error fetching the messages");
         res.status(500).json({
